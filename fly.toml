@@ -12,6 +12,9 @@ primary_region = 'fra'
 [processes]
   app = "node app.js" # add this
 
+[deploy]
+  strategy = "canary"
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -19,3 +22,10 @@ primary_region = 'fra'
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
+  [[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/health"
