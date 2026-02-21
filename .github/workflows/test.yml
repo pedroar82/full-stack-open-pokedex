@@ -1,5 +1,8 @@
 name: Testing stuff
 
+env:
+  CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
+
 on:
   push:
     branches:
@@ -11,6 +14,8 @@ on:
 jobs:
   a_test_job:
     runs-on: ubuntu-latest
+    outputs:
+      commit: ${{ steps.set-commit.outputs.commit }}
     steps:
       - uses: actions/checkout@v4
       - name: github context
@@ -25,3 +30,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: Test variables
+        if: ${{ env.CONTAINS_SKIP == 'true' }}   # 👈
+        run: echo "SKIIIP"  
+     
