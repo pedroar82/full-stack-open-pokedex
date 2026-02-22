@@ -75,7 +75,7 @@ jobs:
     if: ${{ success() }}
     steps:
       - name: Notify Discord
-        uses: rjstone/discord-webhook-notify@v2
+        uses: sarisia/actions-status-discord@v1
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: info
@@ -87,7 +87,7 @@ jobs:
     if: ${{ failure() }}
     steps:
       - name: Notify Discord on failure
-        uses: rjstone/discord-webhook-notify@v2
+        uses: sarisia/actions-status-discord@v1
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           severity: error
