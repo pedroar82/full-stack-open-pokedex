@@ -82,14 +82,14 @@ jobs:
           details: Deployment successful!
 
   notify_failure:
-  needs: [lint, test, deploy]
-  runs-on: ubuntu-latest
-  if: ${{ failure() }}
-  steps:
-    - name: Notify Discord on failure
-      uses: rjstone/discord-webhook-notify@v2
-      with:
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        severity: error
-        details: Build failed!        
+    needs: [lint, test, deploy]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - name: Notify Discord on failure
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          details: Build failed!        
                 
