@@ -78,8 +78,7 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: info
-          details: Deployment successful!
+         
 
   notify_failure:
     needs: [lint, test, deploy, tag_release]
@@ -90,6 +89,5 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: error
-          details: Build failed!        
+                 
                 
