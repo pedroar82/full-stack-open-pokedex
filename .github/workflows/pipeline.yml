@@ -72,7 +72,8 @@ jobs:
   notify_discord:
     needs: [lint, test, deploy, tag_release]
     runs-on: ubuntu-latest
-    if: ${{ success() }}
+#    if: ${{ success() }} 
+    if: ${{ false }} #prevent spam in discord
     steps:
       - name: Notify Discord
         uses: sarisia/actions-status-discord@v1
@@ -83,7 +84,8 @@ jobs:
   notify_failure:
     needs: [lint, test, deploy, tag_release]
     runs-on: ubuntu-latest
-    if: ${{ failure() }}
+#    if: ${{ failure() }}
+    if: ${{ false }} #prevent spam in discord
     steps:
       - name: Notify Discord on failure
         uses: sarisia/actions-status-discord@v1
